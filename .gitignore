@@ -1,0 +1,23 @@
+// PlugPlugMin special Luna_________ edition v0.1
+(function (
+	e,//API
+	t,//true
+	n //false
+) {
+	var r = t,//Autowoot
+		i = n;//Autojoin
+	e.chatLog("Loaded PlugPlugMin v0.1");
+	e.on(e.CHAT, function (t) {
+		(t.message.indexOf("@" + e.getUser().username) != -1
+				&& (i && /!disable/.test(t.message) && e.hasPermission(t.fromID, 1) && (e.sendChat("@" + t.from + " - You can't tell me what to do!") || (i = !i))
+				|| /!status/.test(t.message) && e.sendChat("@" + t.from + " - Status: you're a butt face hahahaha, autowoot: " + r + ", autojoin: " + i)));
+	});
+	e.on(e.CHAT_COMMAND, function (t) {
+		t == "/w" && e.chatLog("Autowoot turned o" + ((r = !r) ? "n" : "ff"))
+				|| t == "/j" && e.chatLog("Autojoin turned o" + ((i = !i) ? "n" : "ff"));
+	});
+	e.on(e.DJ_ADVANCE, function (t) {
+		(r && $("#woot").click());
+		(i && t.lastPlay.dj.id == e.getUser().id && e.djJoin())
+	})
+})(API, !0, !1)
