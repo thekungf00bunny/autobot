@@ -386,10 +386,7 @@ botMethods.cleanString = function(string){
                             //orig 1000 cooldown
                         }
                         break;
-                        
-                        
-                        
-                        case "!ban":
+                    case "!ban":
                         if(typeof command[1] == "undefined"){
                             var crowd = API.getUsers();
                             var randomUser = Math.floor(Math.random() * crowd.length);
