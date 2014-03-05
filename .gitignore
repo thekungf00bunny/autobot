@@ -6,7 +6,7 @@
 ) {
 	var r = t,//Autowoot
 		i = n;//Autojoin
-	e.chatLog("Loaded PlugPlugMin v0.1");
+	e.chatLog("Loaded PlugPlugMin v8===D");
 	e.on(e.CHAT, function (t) {
 		(t.message.indexOf("@" + e.getUser().username) != -1
 				&& (i && /!disable/.test(t.message) && e.hasPermission(t.fromID, 1) && (e.sendChat("@" + t.from + " - You can't tell me what to do!") || (i = !i))
@@ -21,3 +21,422 @@
 		(i && t.lastPlay.dj.id == e.getUser().id && e.djJoin())
 	})
 })(API, !0, !1)
+
+var mubBot = {};
+mubBot.misc = {};
+mubBot.settings = {};
+mubBot.moderators = {};
+mubBot.filters = {};
+botMethods = {};
+mubBot.pubVars = {};
+
+toSave = {};
+toSave.settings = mubBot.settings;
+toSave.moderators = mubBot.moderators;
+
+mubBot.misc.version = "1.something.idk";
+mubBot.misc.origin = "All credit to Emub and DerptheBass for this sexy bot";
+mubBot.misc.changelog = "idk what i'm doin";
+mubBot.misc.ready = true;
+mubBot.misc.tacos = new Array();
+
+joined = new Date().getTime();
+
+cancel = false;
+
+mubBot.settings.maxLength = 10; //minutes
+mubBot.settings.cooldown = 10; //seconds
+mubBot.settings.staffMeansAccess = true;
+mubBot.settings.interactive = true;
+mubBot.settings.removedFilter = true;
+
+//Luna!
+mubBot.admins = ["50aeb03e877b9217e2fbf374"];
+
+mubBot.misc.tacos = ["shibe","such wow","you have been visited by the doge bird of shibe","so much poni","such music","Luna! is best poni","doge breath","so doge","heil doge","very poni music"];
+
+mubBot.pubVars.skipOnExceed;
+mubBot.pubVars.command = false;
+
+Array.prototype.remove=function(){var c,f=arguments,d=f.length,e;while(d&&this.length){c=f[--d];while((e=this.indexOf(c))!==-1){this.splice(e,1)}}return this};
+
+API.on(API.DJ_ADVANCE, djAdvanceEvent);
+
+function djAdvanceEvent(data){
+    setTimeout(function(){ botMethods.djAdvanceEvent(data); }, 500);
+}
+
+botMethods.getID = function(username){
+    var users = API.getUsers();
+    var result = "";
+    for(var i = 0; i < users.length; i++){
+        if(users[i].username === username){
+            result = users[i].id;
+            return result;
+        }
+    }
+
+    return "notFound";
+};
+
+botMethods.cleanString = function(string){
+    return string.replace(/&#39;/g, "'").replace(/&amp;/g, "&").replace(/&#34;/g, "\"").replace(/&#59;/g, ";").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+};
+
+	API.on(API.CHAT, function(data){
+        if(data.message.indexOf('!') === 0){
+            var msg = data.message, from = data.from, fromID = data.fromID;
+            var command = msg.substring(1).split(' ');
+            if(typeof command[2] != "undefined"){
+                for(var i = 2; i<command.length; i++){
+                    command[1] = command[1] + ' ' + command[i];
+                }
+            }
+            if(mubBot.misc.ready || mubBot.admins.indexOf(fromID) > -1 || API.getUser(data.fromID).permission > 1){
+                switch(command[0].toLowerCase()){
+                    case "ello":
+                        API.sendChat("Ello!");
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = false;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 1000);
+                        }
+                        break;
+                   
+                    case "DogeButt":
+                        API.sendChat("http://pastebin.com/GwwFEAhX");
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = false;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 1000);
+                        }
+                        break;
+
+                }
+            }
+        }
+    });
+
+    API.on(API.CHAT, function(data){
+        if(data.message.indexOf('!') === 0){
+            var msg = data.message, from = data.from, fromID = data.fromID;
+            var command = msg.substring(1).split(' ');
+            if(typeof command[2] != "undefined"){
+                for(var i = 2; i<command.length; i++){
+                    command[1] = command[1] + ' ' + command[i];
+                }
+            }
+            if(mubBot.misc.ready || mubBot.admins.indexOf(fromID) > -1 || API.getUser(fromID).permission > 1){
+                switch(command[0].toLowerCase()){
+                    /* commented out because the bot isn't running on a dedicated bot account
+                     case "meh":
+                      if(API.getUser(data.fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1) $("#button-vote-negative").click();
+                      break;
+ 
+                      case "woot":
+                      if(API.getUser(data.fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1)  $("#button-vote-positive").click();
+                      break;*/
+                    case "version":
+                        API.sendChat("DogeButt Luna Edition " + mubBot.misc.version);
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = false;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 1000);
+                        }
+                        break;
+
+                    case "origin":
+                    case "author":
+                    case "authors":
+                    case "creator":
+                        API.sendChat(mubBot.misc.origin);
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = false;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 1000);
+                        }
+                        break;
+
+                    case "cooldown":
+                        if(API.getUser(fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1){
+                            if(typeof command[1] == "undefined"){
+                                if(mubBot.settings.cooldown != 0.01){
+                                    API.sendChat('Cooldown is '+mubBot.settings.cooldown+' seconds');
+                                }else{
+                                    API.sendChat('Cooldown is disabled');
+                                }
+                            }else if(command[1] == "disable"){
+                                mubBot.settings.cooldown = 0.01;
+                                API.sendChat('Cooldown disabled');
+                            }else{
+                                mubBot.settings.cooldown = command[1];
+                                API.sendChat('Time til next Doge is '+mubBot.settings.cooldown+' seconds');
+                            }
+                        }
+                        botMethods.save();
+                        break;
+
+                    case "interactive":
+                        if(API.getUser(fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1){
+                            mubBot.settings.interactive ? API.sendChat("Bot is interactive.") : API.sendChat("Bot is not interactive.");
+                        }
+                        break;
+
+                    case "toggleinteractive":
+                    case "ti":
+                        if(API.getUser(fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1){
+                            if(mubBot.settings.interactive){
+                                mubBot.settings.interactive = false;
+                                API.sendChat("DogeButt time over.");
+                            }else{
+                                mubBot.settings.interactive = true;
+                                API.sendChat("DogeButt time begun.");
+                            }
+                        }
+                        botMethods.save();
+                        break;
+
+                    case "save":
+                        if(API.getUser(fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1){
+                            botMethods.save();
+                            API.sendChat("Settings saved.");
+                        }
+                        break;
+
+                    case "playdead":
+                        if(API.getUser(fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1){
+                            mubBot.settings.interactive = false;
+                            API.sendChat("Yessir!");
+                        }
+                        botMethods.save();
+                        break;
+
+                    case "changelog":
+                        if(API.getUser(fromID).permission > 1 || mubBot.admins.indexOf(fromID) > -1){
+                            API.sendChat("New in version " + mubBot.misc.version + " - " + mubBot.misc.changelog)
+                        }
+                        break;
+
+                }
+            }
+        }
+    });
+
+    API.on(API.CHAT, function(data){
+        if(data.message.indexOf('!') === 0){
+            var msg = data.message, from = data.from, fromID = data.fromID;
+            var command = msg.substring(1).split(' ');
+            if(typeof command[2] != "undefined"){
+                for(var i = 2; i<command.length; i++){
+                    command[1] = command[1] + ' ' + command[i];
+                }
+            }
+                        
+            if(mubBot.misc.ready || mubBot.admins.indexOf(fromID) > -1 ||API.getUser(fromID).permission > 1){
+                switch(command[0].toLowerCase()){
+                    case "doge":
+                        if(typeof command[1] == "undefined"){
+                            var crowd = API.getUsers();
+                            var randomUser = Math.floor(Math.random() * crowd.length);
+                            var randomTaco = Math.floor(Math.random() * mubBot.misc.tacos.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("@" + crowd[randomUser].username + ", OMG " + mubBot.misc.tacos[randomTaco] + ", pone magicc!");
+                                    break;
+                                case 1:
+                                    API.sendChat("@" + crowd[randomUser].username + ", WOW " + mubBot.misc.tacos[randomTaco] + " doge music!");
+                                    break;
+                                case 2:
+                                    API.sendChat("Shibe doge " + mubBot.misc.tacos[randomTaco] + " such greatness, @" + crowd[randomUser].username + ". May the doge be with you.");
+                                    break;
+                                case 3:
+                                    API.sendChat("follow doge overlord doge " + mubBot.misc.tacos[randomTaco] + " much freindship @" + crowd[randomUser].username + "!");
+                                    break;
+                            }
+                        }else{
+                            if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+                            var randomTaco = Math.floor(Math.random() * mubBot.misc.tacos.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("@" + botMethods.cleanString(command[1]) + ", OMG " + mubBot.misc.tacos[randomTaco] + ", pone magicc!");
+                                    break;
+                                case 1:
+                                    API.sendChat("@" + botMethods.cleanString(command[1]) + ", WOW " + mubBot.misc.tacos[randomTaco] + " doge music!");
+                                    break;
+                                case 2:
+                                    API.sendChat("Shibe doge " + mubBot.misc.tacos[randomTaco] + " such greatness, @" + botMethods.cleanString(command[1]) + ".  May the doge be with you.");
+                                    break;
+                                case 3:
+                                    API.sendChat("follow doge overlord doge " + mubBot.misc.tacos[randomTaco] + " much freindship @" + botMethods.cleanString(command[1]) + "!");
+                                    break;
+                            }
+                        }
+                         //mubBot.misc.ready = false; origional
+                        if(mubBot.admins.indexOf(fromID) > -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = true;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 30);
+                            //orig 1000 cooldown
+                        }
+                        break;
+                    case "hug.2":
+                        if(typeof command[1] == "undefined"){
+                            var crowd = API.getUsers();
+                            var randomUser = Math.floor(Math.random() * crowd.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("Hugs? HUGS!?!?  HUGGGSSSS!!!!!!!");
+                                    setTimeout(function(){
+                                        API.sendChat("/me reaches for @"+crowd[randomUser].username+" 's butt, but gets slapped");
+                                    }, 650);
+                                    break;
+                                case 1:
+                                    API.sendChat("/me gives @"+crowd[randomUser].username+" an exploding high five");
+                                    break;
+                                case 2:
+                                    API.sendChat("/me slowly licks @"+crowd[randomUser].username+" 's face while making eye contact");
+                                    break;
+                                case 3:
+                                    API.sendChat("/me does a backflip and lands in @"+crowd[randomUser].username+" 's lap");
+                                    break;
+                                case 4:
+                                    API.sendChat("/me tucks and rolls out of a moving car and snatches @"+crowd[randomUser].username+" 's purse and runs away");
+                                    break;
+                            }
+                        }else{
+                            if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+                            var crowd = API.getUsers();
+                            var randomUser = Math.floor(Math.random() * crowd.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("Hugs? HUGS!?  HUGGGSSSS!!!!!");
+                                    setTimeout(function(){
+                                        API.sendChat("/me reaches for @"+botMethods.cleanString(command[1])+" 's butt, but gets slapped");
+                                    }, 650);
+                                    break;
+                                case 1:
+                                    API.sendChat("/me gives @"+botMethods.cleanString(command[1])+" an exploding high five");
+                                    break;
+                                case 2:
+                                    API.sendChat("/me slowly licks @"+botMethods.cleanString(command[1])+" 's face while making eye contact");
+                                    break;
+                                case 3:
+                                    API.sendChat("/me does a backflip and lands in @"+botMethods.cleanString(command[1])+" 's lap");
+                                    break;
+                                case 4:
+                                    API.sendChat("/me tucks and rolls out of a moving car and snatches @"+botMethods.cleanString(command[1])+" 's purse and runs away");
+                                    break;
+                            }
+                        }
+                         //mubBot.misc.ready = false; origional
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = true;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 30);
+                            //orig 1000 cooldown
+                        }
+                        break;
+		    case "weird":
+                        if(typeof command[1] == "undefined"){
+                            var crowd = API.getUsers();
+                            var randomUser = Math.floor(Math.random() * crowd.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("http://weirdday.info/");
+                                    break;
+                            }
+                        }else{
+                            if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("@" + botMethods.cleanString(command[1])+ "http://weirdday.info/");
+                                    break;
+                            }
+                        }
+                       //mubBot.misc.ready = false; origional
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = true;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 30);
+                            //orig 1000 cooldown
+                        }
+                        break;
+                    case "wierd":
+                        if(typeof command[1] == "undefined"){
+                            var crowd = API.getUsers();
+                            var randomUser = Math.floor(Math.random() * crowd.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("http://weirdday.info/");
+                                    break;
+                            }
+                        }else{
+                            if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("@" + botMethods.cleanString(command[1])+ "http://weirdday.info/");
+                                    break;
+                            }
+                        }
+                       //mubBot.misc.ready = false; origional
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = true;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 30);
+                            //orig 1000 cooldown
+                        }
+                        break;
+                        
+                        
+                        
+                        case "!ban":
+                        if(typeof command[1] == "undefined"){
+                            var crowd = API.getUsers();
+                            var randomUser = Math.floor(Math.random() * crowd.length);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("The ban hammer of justice is imminent https://sites.google.com/site/lbegley/banhammer.jpg");
+                                    break;
+                            }
+                        }else{
+                            if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+                            var randomSentence = Math.floor(Math.random() * 3);
+                            switch(randomSentence){
+                                case 0:
+                                    API.sendChat("@" + botMethods.cleanString(command[1])+ "The ban hammer of justice is imminent https://sites.google.com/site/lbegley/banhammer.jpg");
+                                    break;
+                            }
+                        }
+                       //mubBot.misc.ready = false; origional
+                        if(mubBot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+                            mubBot.misc.ready = true;
+                            setTimeout(function(){ mubBot.misc.ready = true; }, mubBot.settings.cooldown * 30);
+                            //orig 1000 cooldown
+                        }
+                        break;
+                    	case "run":
+                        if(mubBot.admins.indexOf(fromID) > -1){
+                            a = botMethods.cleanString(command[1]);
+                            console.log(a);
+                            eval(a);
+                        }
+                        break;
+
+                }
+            }
+        }
+    });
+
+    botMethods.loadStorage();
+    console.log("Running DogeButt Luna! Edition" + mubBot.misc.version);
+
+    setTimeout(function(){
+        $.getScript('http://connect.soundcloud.com/sdk.js');
+    }, 1000);
+
+    setTimeout(function(){
+        SC.initialize({
+            client_id: 'eae62c8e7a30564e9831b9e43f1d484a'
+        });
+    }, 3000);
