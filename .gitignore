@@ -415,7 +415,8 @@ botMethods.cleanString = function(string){
                             //orig 1000 cooldown
                         }
                         break;
-                    	case "run":
+                        
+                    case "run":
                         if(mubBot.admins.indexOf(fromID) > -1){
                             a = botMethods.cleanString(command[1]);
                             console.log(a);
