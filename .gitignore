@@ -334,6 +334,7 @@ botMethods.cleanString = function(string){
                             //orig 1000 cooldown
                         }
                         break;
+                        
 		    case "weird":
                         if(typeof command[1] == "undefined"){
                             var crowd = API.getUsers();
@@ -360,6 +361,7 @@ botMethods.cleanString = function(string){
                             //orig 1000 cooldown
                         }
                         break;
+                        
                     case "wierd":
                         if(typeof command[1] == "undefined"){
                             var crowd = API.getUsers();
@@ -386,6 +388,7 @@ botMethods.cleanString = function(string){
                             //orig 1000 cooldown
                         }
                         break;
+                        
                     case "!ban":
                         if(typeof command[1] == "undefined"){
                             var crowd = API.getUsers();
