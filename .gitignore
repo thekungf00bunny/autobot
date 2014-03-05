@@ -285,20 +285,20 @@ botMethods.cleanString = function(string){
                                 case 0:
                                     API.sendChat("Hugs? HUGS!?!?  HUGGGSSSS!!!!!!!");
                                     setTimeout(function(){
-                                        API.sendChat("/me reaches for @"+crowd[randomUser].username+" 's butt, but gets slapped");
+                                        API.sendChat("/me reaches for @"+crowd[randomUser].username+ " 's butt, but gets slapped");
                                     }, 650);
                                     break;
                                 case 1:
-                                    API.sendChat("/me gives @"+crowd[randomUser].username+" an exploding high five");
+                                    API.sendChat("/me gives @"+crowd[randomUser].username+ " an exploding high five");
                                     break;
                                 case 2:
-                                    API.sendChat("/me slowly licks @"+crowd[randomUser].username+" 's face while making eye contact");
+                                    API.sendChat("/me slowly licks @"+crowd[randomUser].username+ " 's face while making eye contact");
                                     break;
                                 case 3:
-                                    API.sendChat("/me does a backflip and lands in @"+crowd[randomUser].username+" 's lap");
+                                    API.sendChat("/me does a backflip and lands in @"+crowd[randomUser].username+ " 's lap");
                                     break;
                                 case 4:
-                                    API.sendChat("/me tucks and rolls out of a moving car and snatches @"+crowd[randomUser].username+" 's purse and runs away");
+                                    API.sendChat("/me tucks and rolls out of a moving car and snatches @"+crowd[randomUser].username+ " 's purse and runs away");
                                     break;
                             }
                         }else{
@@ -310,20 +310,20 @@ botMethods.cleanString = function(string){
                                 case 0:
                                     API.sendChat("Hugs? HUGS!?  HUGGGSSSS!!!!!");
                                     setTimeout(function(){
-                                        API.sendChat("/me reaches for @"+botMethods.cleanString(command[1])+" 's butt, but gets slapped");
+                                        API.sendChat("/me reaches for @"+botMethods.cleanString(command[1])+ " 's butt, but gets slapped");
                                     }, 650);
                                     break;
                                 case 1:
-                                    API.sendChat("/me gives @"+botMethods.cleanString(command[1])+" an exploding high five");
+                                    API.sendChat("/me gives @"+botMethods.cleanString(command[1])+ " an exploding high five");
                                     break;
                                 case 2:
-                                    API.sendChat("/me slowly licks @"+botMethods.cleanString(command[1])+" 's face while making eye contact");
+                                    API.sendChat("/me slowly licks @"+botMethods.cleanString(command[1])+ " 's face while making eye contact");
                                     break;
                                 case 3:
-                                    API.sendChat("/me does a backflip and lands in @"+botMethods.cleanString(command[1])+" 's lap");
+                                    API.sendChat("/me does a backflip and lands in @"+botMethods.cleanString(command[1])+ " 's lap");
                                     break;
                                 case 4:
-                                    API.sendChat("/me tucks and rolls out of a moving car and snatches @"+botMethods.cleanString(command[1])+" 's purse and runs away");
+                                    API.sendChat("/me tucks and rolls out of a moving car and snatches @"+botMethods.cleanString(command[1])+ " 's purse and runs away");
                                     break;
                             }
                         }
